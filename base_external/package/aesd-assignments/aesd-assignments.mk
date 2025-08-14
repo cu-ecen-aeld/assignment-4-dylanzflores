@@ -11,7 +11,7 @@ AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 # Build command: Build finder-app by calling make in finder-app directory
 define AESD_ASSIGNMENTS_BUILD_CMDS
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
+	$(MAKE) CC=$(TARGET_CC) -C $(@D)/finder-app all
 endef
 
 define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
