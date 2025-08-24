@@ -1,3 +1,10 @@
+name: assignment-test
+on:
+    push:
+        tags-ignore:
+            - '*'
+        branches:
+            - '*'
 jobs:
   unit-test:   # Part 1
     runs-on: ubuntu-latest
