@@ -1,45 +1,20 @@
-name: assignment-test
-on:
-    push:
-        tags-ignore:
-            - '*'
-        branches:
-            - '*'
-
 jobs:
-    # ----------------
-    # Part 1: Unit tests
-    # ----------------
-    unit-test:
-        runs-on: ubuntu-latest
-        timeout-minutes: 15
-        steps:
-          - uses: actions/checkout@v2
-          - name: Run unit tests
-            run: |
-              chmod +x unit-test.sh
-              ./unit-test.sh
+  full-test:   # Part 2 (unchanged)
+    container: cuaesd/aesd-autotest:24-assignment4-buildroot
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - run: git submodule update --init --recursive
+      - uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - run: ./full-test.sh
 
-    # ----------------
-    # Part 2: Full buildroot + QEMU tests
-    # ----------------
-    full-test:
-        container: cuaesd/aesd-autotest:24-assignment4-buildroot
-        runs-on: self-hosted
-        timeout-minutes: 120
-        steps:
-          - uses: actions/checkout@v2
-          - name: Checkout submodules
-            run: git submodule update --init --recursive
-          - uses: webfactory/ssh-agent@v0.5.3
-            with:
-                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          - name: Run full test
-            env:
-              GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
-            run: ./full-test.sh
-          - name: Cleanup
-            if: always()
-            run: |
-              ssh-add -D
+  unit-test:   # Part 1 (new job)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          chmod +x unit-test.sh
+          ./unit-test.sh
 

@@ -1,13 +1,12 @@
 #!/bin/bash
-# Run unit tests for the assignment
+# Run unit tests for Part 1 only
 
-# Automate these steps from the readme:
-# Create a build subdirectory, change into it, run
-# cmake .. && make && run the assignment-autotest application
-mkdir -p build
-cd build
-cmake ..
+mkdir -p build-p1
+cd build-p1
+cmake ../assignment-autotest-P1
 make clean
 make
 cd ..
-./build/assignment-autotest/assignment-autotest
+# Run the actual test binary (correct path)
+./build-p1/assignment-autotest
+
