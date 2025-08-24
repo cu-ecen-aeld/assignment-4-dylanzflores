@@ -1,20 +1,23 @@
 jobs:
+  unit-test:   # Part 1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive    # ensure assignment-autotest-P1 is checked out
+      - run: |
+          chmod +x unit-test.sh
+          ./unit-test.sh
+
   full-test:   # Part 2 (unchanged)
     container: cuaesd/aesd-autotest:24-assignment4-buildroot
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - run: git submodule update --init --recursive
+        with:
+          submodules: recursive    # ensure any needed submodules are checked out
       - uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - run: ./full-test.sh
-
-  unit-test:   # Part 1 (new job)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: |
-          chmod +x unit-test.sh
-          ./unit-test.sh
 
