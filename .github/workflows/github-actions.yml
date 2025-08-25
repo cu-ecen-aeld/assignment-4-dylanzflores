@@ -8,15 +8,17 @@ on:
       - '*'
 
 jobs:
-  unit-test:   # Part 1
-    container: cuaesd/aesd-autotest:24-unit-test
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v2
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
-      - name: Run unit test
-        run: ./unit-test.sh
+  unit-test:
+  runs-on: self-hosted
+  container: cuaesd/aesd-autotest:24-unit-test
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Make unit-test.sh executable
+      run: chmod +x ./unit-test.sh
+    - name: Run unit tests
+      run: ./unit-test.sh
 
   full-test:   # Part 2
     container: cuaesd/aesd-autotest:24-assignment4-buildroot
