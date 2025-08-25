@@ -9,20 +9,20 @@ on:
 
 jobs:
   unit-test:
-  runs-on: self-hosted
-  container: cuaesd/aesd-autotest:24-unit-test
-  steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
-    - name: Make unit-test.sh executable
-      run: chmod +x ./unit-test.sh
-    - name: Run unit tests
-      run: ./unit-test.sh
+    runs-on: self-hosted
+    container: cuaesd/aesd-autotest:24-unit-test
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Make unit-test.sh executable
+        run: chmod +x ./unit-test.sh
+      - name: Run unit tests
+        run: ./unit-test.sh
 
   full-test:   # Part 2
-    container: cuaesd/aesd-autotest:24-assignment4-buildroot
     runs-on: self-hosted
+    container: cuaesd/aesd-autotest:24-assignment4-buildroot
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v2
@@ -39,4 +39,3 @@ jobs:
         if: always()
         run: |
           ssh-add -D
-
