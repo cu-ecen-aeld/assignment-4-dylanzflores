@@ -6,3 +6,6 @@
     path = buildroot
     url = https://gitlab.com/buildroot.org/buildroot
     branch = 2024.02.x
+[submodule "assignment-autotest-P1"]
+	path = assignment-autotest-P1
+	url = https://github.com/cu-ecen-5013/assignment-autotest
