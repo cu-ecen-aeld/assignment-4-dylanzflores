@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/dylan/assignment-4-dylanzflores/assignment-autotest-P1/Unity/src -I/home/dylan/assignment-4-dylanzflores/assignment-autotest-P1/. -I/home/dylan/assignment-4-dylanzflores/assignment-autotest-P1/..
 
-C_FLAGS =  -Wall -g
+C_FLAGS =  -Wall -Wno-error -g
 
